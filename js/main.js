@@ -44,10 +44,10 @@ $(function(){
 			$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth(ITEM_WIDTH,true);
 			$(CLASS_ITEMS,CLASS_CONTAINER).outerHeight(ITEM_HEIGHT,true);
 			
-			console.log('width='+$(CLASS_ITEMS,CLASS_CONTAINER).width());
-			console.log('outerWidth(true)='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth(true));
-			console.log('outerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth());
-			console.log('innerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).innerWidth());
+			//console.log('width='+$(CLASS_ITEMS,CLASS_CONTAINER).width());
+		//	console.log('outerWidth(true)='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth(true));
+			//console.log('outerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth());
+			//console.log('innerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).innerWidth());
 			//set dimention of Scroller	
 			scroller.setDimensions(CLIENT_WIDTH, CLIENT_HEIGHT, ITEM_WIDTH*number_items, CONTENT_HEIGHT);
 		};
@@ -57,11 +57,16 @@ $(function(){
 			if (e.target.tagName.match(/input|textarea|select/i)) {
 				return;
 			}
+			var timeStamp = e.timeStamp
+			if(timeStamp === undefined){
+				var d = new Date;
+				timeStamp = d.getTime();
+			}
 			
 			scroller.doTouchStart([{
 				pageX: e.pageX,
 				pageY: e.pageY
-			}], e.timeStamp);
+			}],timeStamp);
 
 			mousedown = true;
 		});
@@ -70,11 +75,17 @@ $(function(){
 			if (!mousedown) {
 				return;
 			}
-			
+			//console.log($('.item:active'));
+			$('.item:active').focusout();
+			var timeStamp = e.timeStamp
+			if(timeStamp === undefined){
+				var d = new Date;
+				timeStamp = d.getTime();
+			}
 			scroller.doTouchMove([{
 				pageX: e.pageX,
 				pageY: e.pageY
-			}], e.timeStamp);
+			}], timeStamp);
 
 			mousedown = true;
 		});
@@ -83,8 +94,12 @@ $(function(){
 			if (!mousedown) {
 				return;
 			}
-			
-			scroller.doTouchEnd(e.timeStamp);
+			var timeStamp = e.timeStamp
+			if(timeStamp === undefined){
+				var d = new Date;
+				timeStamp = d.getTime();
+			}
+			scroller.doTouchEnd(timeStamp);
 
 			mousedown = false;
 		});
@@ -92,5 +107,6 @@ $(function(){
 		$(CLASS_CONTAINER).bind(navigator.userAgent.indexOf("Firefox") > -1 ? "DOMMouseScroll" :  "mousewheel", function(e) {
 			scroller.doMouseZoom(e.detail ? (e.detail * -120) : e.wheelDelta, e.timeStamp, e.pageX, e.pageY);
 		});
-		window.addEventListener("resize", reflow, false);
+		$(window).bind('resize',reflow);
+		//window.addEventListener("resize", reflow, false);
 });
