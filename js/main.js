@@ -28,7 +28,7 @@ $(function(){
 				item_margin = parseFloat($(this).css('margin-left'))+ parseFloat($(this).css('margin-right'));
 			});
 			CLIENT_WIDTH = $(CLASS_CONTAINER).innerWidth();
-
+			console.log(CLIENT_WIDTH);
 			CLIENT_HEIGHT = $(CLASS_CONTAINER).innerHeight();
 
 			ITEM_WIDTH = CLIENT_WIDTH/NUMBER_ITEMS_X;
@@ -109,4 +109,9 @@ $(function(){
 		});
 		$(window).bind('resize',reflow);
 		//window.addEventListener("resize", reflow, false);
+		
+		window.addItem = function(){
+			$(CLASS_CONTENT).append('<div class="item"><div class="content">add<div></div>');
+			reflow();
+		}
 });

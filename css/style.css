@@ -62,7 +62,7 @@ html[xmlns] .clearfix {
 background: #111;
 position: absolute;
 top: 101px;
-bottom: 170px;
+bottom: 200px;
 left: 0;
 right: 0;
 }
@@ -71,7 +71,7 @@ right: 0;
 }
 #footer {
 	background:url('../img/bg_highlight.jpg') repeat;
-	margin: -170px auto 0;
+	margin: -201px auto 0;
 	min-width: 500px;
 	height: 160px;
 	position: relative;
@@ -111,7 +111,7 @@ right: 0;
 	background:url('../img/bg_highlight.jpg') repeat;
 	cursor: default;
 	overflow: hidden;
-	height: 100px;
+	height: 130px;
 	margin: 0 20px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -147,12 +147,18 @@ right: 0;
 #carousel #content .item:first-child {
 	margin-left:0;
 }
+#carousel #content .item .title {
+	background: #333;
+	margin:5px;
+}
+#carousel #content .item .content {
+	background: #333;
+	margin:5px;
+}
 #carousel #content .item {
 float: left;
-background: #333;
+position:relative;
 /*border-left: 1px solid #ccc;
 border-right: 1px solid #ccc;*/
-padding: 10px;
-	display: inline-block;
-	margin:0 5px;
+display: inline-block;
 }
