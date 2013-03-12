@@ -1,5 +1,5 @@
 $(function(){
-		var NUMBER_ITEMS_X=5,
+		var NUMBER_ITEMS_X=7,
 				ITEM_WIDTH=0,
 				ITEM_HEIGHT=0,
 				CLIENT_WIDTH = 0,
@@ -20,8 +20,8 @@ $(function(){
 		
 		// Reflow handling
 		var reflow = function() {
-			number_items = $(CLASS_ITEMS,CLASS_CONTAINER).length;
-			item_padding = 0;
+			number_items = $(CLASS_ITEMS,CLASS_CONTAINER).length,
+			item_padding = 0,
 			item_margin = 0;
 			$(CLASS_ITEMS,CLASS_CONTAINER).each(function(){
 				item_padding = parseFloat($(this).css('padding-left'))+ parseFloat($(this).css('padding-right'));
@@ -43,7 +43,7 @@ $(function(){
 			//set width & height for item 
 			$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth(ITEM_WIDTH,true);
 			$(CLASS_ITEMS,CLASS_CONTAINER).outerHeight(ITEM_HEIGHT,true);
-			
+			console.log(ITEM_HEIGHT);
 			//console.log('width='+$(CLASS_ITEMS,CLASS_CONTAINER).width());
 		//	console.log('outerWidth(true)='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth(true));
 			//console.log('outerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth());
@@ -109,9 +109,10 @@ $(function(){
 		});
 		$(window).bind('resize',reflow);
 		//window.addEventListener("resize", reflow, false);
-		
+	    $('img').on('dragstart', function(event) { event.preventDefault(); });
 		window.addItem = function(){
 			$(CLASS_CONTENT).append('<div class="item"><div class="content">add<div></div>');
 			reflow();
 		}
+       
 });

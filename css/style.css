@@ -42,12 +42,12 @@ html[xmlns] .clearfix {
 }
 #header .logo{
 	font-size: 45px;
-	line-height: 100px;
+	line-height: 60px;
 	background: rgb(0, 65, 95);
 	padding-left: 10px;
 }
 #header {
-	height: 100px;
+	height: 60px;
 	border-bottom: 1px solid rgb(68, 91, 116);
 }
 #wrapper {
@@ -61,7 +61,7 @@ html[xmlns] .clearfix {
 /*padding: 0 0 160px;*/
 background: #111;
 position: absolute;
-top: 101px;
+top: 61px;
 bottom: 200px;
 left: 0;
 right: 0;
@@ -73,7 +73,7 @@ right: 0;
 	background:url('../img/bg_highlight.jpg') repeat;
 	margin: -201px auto 0;
 	min-width: 500px;
-	height: 160px;
+	height: 190px;
 	position: relative;
 	padding-top: 10px;
 	/*-webkit-box-shadow: 0px 10px 14px 14px rgb(54, 54, 54);
@@ -99,15 +99,18 @@ right: 0;
 }
 #products .title{
 	height: 10%;
-	margin: 0 auto;
-	width: 50%;
-	text-align: center;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+    font-size: 30px;
+    font-family: roboto;
+    font-weight: 300;
 }
 
 /**CAROUSEL STYLE*/
 #carousel .container{
 	position: relative;
-	border: 5px solid rgb(39, 39, 39);
+/*	border: 5px solid rgb(39, 39, 39);*/
 	background:url('../img/bg_highlight.jpg') repeat;
 	cursor: default;
 	overflow: hidden;
@@ -122,7 +125,7 @@ right: 0;
 }
 
 #carousel #content{
-	height:100px;
+	height:130px;
 	-webkit-transform-origin: left top;
 	-webkit-transform: translateZ(0);
 	-moz-transform-origin: left top;
@@ -139,7 +142,8 @@ right: 0;
 	height:100%;
 }
 #carousel #content .item:active {
-	background:rgb(40, 63, 85);
+    border: 5px solid rgb(40, 63, 85);
+    
 }
 #carousel #content .item:last-child {
 	margin-right:0;
@@ -148,16 +152,24 @@ right: 0;
 	margin-left:0;
 }
 #carousel #content .item .title {
-	background: #333;
-	margin:5px;
+    background: url('../img/title_bg.png');
+    height: 18%;
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    left: 0px;
+    right: 0px;
 }
 #carousel #content .item .content {
 	background: #333;
-	margin:5px;
+    height: 100%;
+    overflow: hidden;
 }
 #carousel #content .item {
 float: left;
+   border: 5px solid #ccc;
 position:relative;
+margin:2px;
 /*border-left: 1px solid #ccc;
 border-right: 1px solid #ccc;*/
 display: inline-block;
