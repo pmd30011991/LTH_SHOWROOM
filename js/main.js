@@ -1,6 +1,6 @@
 $(function(){
 		var NUMBER_ITEMS_X=7,
-				ITEM_WIDTH=0,
+				ITEM_WIDTH=192,
 				ITEM_HEIGHT=0,
 				CLIENT_WIDTH = 0,
 				CLIENT_HEIGHT = 0,
@@ -17,7 +17,6 @@ $(function(){
 		scroller = new Scroller(render, {
 			scrollingY: false
 		});
-		
 		// Reflow handling
 		var reflow = function() {
 			number_items = $(CLASS_ITEMS,CLASS_CONTAINER).length,
@@ -28,10 +27,10 @@ $(function(){
 				item_margin = parseFloat($(this).css('margin-left'))+ parseFloat($(this).css('margin-right'));
 			});
 			CLIENT_WIDTH = $(CLASS_CONTAINER).innerWidth();
-			console.log(CLIENT_WIDTH);
+			//console.log(CLIENT_WIDTH);
 			CLIENT_HEIGHT = $(CLASS_CONTAINER).innerHeight();
 
-			ITEM_WIDTH = CLIENT_WIDTH/NUMBER_ITEMS_X;
+			//ITEM_WIDTH = CLIENT_WIDTH/NUMBER_ITEMS_X;
 
 			ITEM_HEIGHT = CLIENT_HEIGHT;
 			
@@ -49,7 +48,7 @@ $(function(){
 			//console.log('outerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth());
 			//console.log('innerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).innerWidth());
 			//set dimention of Scroller	
-			scroller.setDimensions(CLIENT_WIDTH, CLIENT_HEIGHT, ITEM_WIDTH*number_items, CONTENT_HEIGHT);
+			scroller.setDimensions(CLIENT_WIDTH, CLIENT_HEIGHT, CONTENT_WIDTH, CONTENT_HEIGHT);
 		};
 		reflow();
 		//bind event
