@@ -42,7 +42,7 @@ $(function(){
 			//set width & height for item 
 			$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth(ITEM_WIDTH,true);
 			$(CLASS_ITEMS,CLASS_CONTAINER).outerHeight(ITEM_HEIGHT,true);
-			console.log(ITEM_HEIGHT);
+			//console.log(ITEM_HEIGHT);
 			//console.log('width='+$(CLASS_ITEMS,CLASS_CONTAINER).width());
 		//	console.log('outerWidth(true)='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth(true));
 			//console.log('outerWidth='+$(CLASS_ITEMS,CLASS_CONTAINER).outerWidth());

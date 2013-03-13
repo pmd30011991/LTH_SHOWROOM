@@ -101,6 +101,8 @@ right: 0;
 }
 #products .contents {
 	height:90%;
+    width: 90%;
+margin: 0 auto;
 }
 #products .title{
 	height: 10%;
