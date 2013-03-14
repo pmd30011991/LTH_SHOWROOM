@@ -43,6 +43,7 @@ var getData = function(type){
 					var data = json.data;
 					$.each(data,function(i,e){
 						$($(PRODUCT_CLASS).get(i)).find('.content').html('<img src='+e.file+' />');
+						product_number_loaded++;
 					});
 				},
 				error:function(){}
@@ -71,7 +72,8 @@ var removeData = function(){
 		$(PRODUCT_CLASS).outerHeight(ITEM_HEIGHT-1,true);
         $(PRODUCT_CLASS).css({'max-width':ITEM_MAX_WIDTH,'max-height':ITEM_MAX_HEIGHT});
         removeData();
-     // console.log(data_count);
+      console.log(data_count);
+      console.log(product_number_loaded);
 		 $('#carousel .container #content .item').unbind('click');
 		 $('#carousel .container #content .item').bind('click',function(){
 					$(PRODUCT_CLASS).remove();
