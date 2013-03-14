@@ -1,9 +1,13 @@
-<?php 
+<?php
 $folder = $_POST['type'];
+$from = $_POST['from'];
+$to = $_POST['to'];
 $products_folder ='products';
 $content_dir = dirname(dirname(__FILE__))."/".$products_folder.'/'.$folder;
 $content_handle = opendir($content_dir);
 $result = array();
+$result['data']= array();
+$result['size']= 0;
 while (false !== ($file = readdir($content_handle))) {
 try{
 		if(is_file($content_dir.'/'.$file)){
@@ -18,10 +22,10 @@ try{
 			else if(in_array($ext,$images_ext))
 				$type = 'image';
 				
-			$result[] = array('type'=>$type,
-												'file'=>$content_dir.'/'.$file
+			$result['data'][] = array('type'=>$type,
+												'file'=>'products/'.$folder.'/'.$file
 												);
-												
+		$result['size']++;										
 		}
 		} catch(Exception $e){
 			echo $e->getMessage();

@@ -109,18 +109,6 @@ $(function(){
 		$(window).bind('resize',reflow);
 		//window.addEventListener("resize", reflow, false);
 	    $('img').on('dragstart', function(event) { event.preventDefault(); });
-		$('.item',CLASS_CONTENT).click(function(){
-			$.ajax({
-				url:'admin/get_content.php',
-				data:{'type':$(this).attr('data')},
-				type:'post',
-				dataType :'json',
-				success:function(html){
-					console.log(html);
-				},
-				error:function(){}
-			});
-		});
 		window.addItem = function(){
 			$(CLASS_CONTENT).append('<div class="item"><div class="content">add<div></div>');
 			reflow();

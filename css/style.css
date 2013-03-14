@@ -96,6 +96,7 @@ right: 0;
 	line-height: 65px;
 }
 #products .contents .product{
+	overflow: hidden;
 	border:1px solid #ccc;
 	background:#ddd;
 }
