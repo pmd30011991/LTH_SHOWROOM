@@ -7,6 +7,7 @@
 		<script src="js/render.js"></script>
 		<script src="js/jwplayer/jwplayer.js"></script>
 		<script>jwplayer.key="i6F2D/hQUoMUCXK7ruEBq2A7wVIebrUUFsLKkw=="</script>
+		<script src="js/jquery.lazyload.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
@@ -47,7 +48,7 @@
 														if ($thumb != "." && $thumb != "..") {
 															$thumb_img =  $products_url.$entry.'/thumb/'.$thumb;
 															echo '<div class="item" data="'.$entry.'"><div class="content">';
-															echo '<img align="middle" src="'.$thumb_img.'"/>';
+															echo '<img class="lazy" align="middle" src="'.$thumb_img.'"/>';
 															echo '</div><div class="title">'.$entry.'</div></div>';
 														}
 													}
