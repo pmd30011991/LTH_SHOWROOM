@@ -50,7 +50,10 @@ var getData = function(type){
 					data_rows_number = json.size;
 					$.each(data,function(i,e){
 						$(PRODUCT_CLASS).fadeIn(300);
-						$($(PRODUCT_CLASS).get(i)).find('.content').html('<img class="lazy" src='+e.file+' />');
+						if(e.type=='image')
+							$($(PRODUCT_CLASS).get(i)).find('.content').html('<img class="lazy" src='+e.file+' />');
+						else {
+						}
 					});
 				},
 				error:function(){}

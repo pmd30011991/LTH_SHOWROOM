@@ -5,12 +5,11 @@
 		<script src="js/Animate.js"></script>
 		<script src="js/Scroller.js"></script>
 		<script src="js/render.js"></script>
-		<script src="js/jwplayer/jwplayer.js"></script>
-		<script>jwplayer.key="i6F2D/hQUoMUCXK7ruEBq2A7wVIebrUUFsLKkw=="</script>
 		<script src="js/jquery.lazyload.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 	<body>
+		<div id="player"></div>
 		<div id="wrapper" class="clearfix">
 			<div id="header" class="">
 				<p class="logo">LOGO HERE</p>
