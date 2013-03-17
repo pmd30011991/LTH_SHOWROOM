@@ -53,6 +53,19 @@ var getData = function(type){
 						if(e.type=='image')
 							$($(PRODUCT_CLASS).get(i)).find('.content').html('<img class="lazy" src='+e.file+' />');
 						else {
+						var flashvars = {
+						  name1: "hello",
+						  name2: "world",
+						  name3: "foobar"
+						};
+						var params = {
+						  menu: "false"
+						};
+						var attributes = {
+						  id: "myDynamicContent",
+						  name: "myDynamicContent"
+						};
+						swfobject.embedSWF("js/swf/test.swf", "player", "300", "120", "9.0.0", "../js/swf/expressInstall.swf",flashvars, params, attributes);
 						}
 					});
 				},

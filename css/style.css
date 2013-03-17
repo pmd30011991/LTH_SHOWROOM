@@ -192,3 +192,6 @@ display: inline-block;
 .lazy {
   /*display: none;*/
 }
+#player {
+	position:absolute;
+}

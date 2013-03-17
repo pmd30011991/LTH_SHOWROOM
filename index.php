@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="js/swfobject.js"></script>
 		<script src="js/Animate.js"></script>
 		<script src="js/Scroller.js"></script>
 		<script src="js/render.js"></script>
