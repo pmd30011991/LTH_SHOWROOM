@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="js/swfobject.js"></script>
+		<script src="js/video.min.js"></script>
 		<script src="js/Animate.js"></script>
 		<script src="js/Scroller.js"></script>
 		<script src="js/render.js"></script>
 		<script src="js/jquery.lazyload.min.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/video-js.css" />
 	</head>
 	<body>
 		<div id="player"></div>
