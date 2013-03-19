@@ -70,7 +70,7 @@ class Database {
 			else{
 				$sth->execute($args);
 			}
-			if($tokens[0] == "SELECT"){
+			if($tokens[0] == "select"){
 				$sth->setFetchMode(PDO::FETCH_ASSOC);
 				$results = $sth->fetchAll();
 				return $results;
@@ -87,18 +87,39 @@ class Database {
 	 * @return int ID of the last inserted row
 	 */
 	function insert($table,$args){
-			$sql ="insert into $table(";
+			$sql ="insert into `$table`(";
 			$columns ="";
 			$values ="";
 			foreach($args as $k=>$v){
 				$columns .='`'.$k.'`,';
-				$values .='`'.$k.'`,';
+				$values .="'".$v."',";
 			}
 			$columns = trim($columns,',');
-			$values = trim($columns,',');
-			$sql.=$columns. 'values('.$values.')';
-			return $this->query($sql);
+			$values = trim($values,',');
+			$sql.=$columns. ') values('.$values.')';
+			return $this->query($sql,null);
 	}
+	function update($table,$args,$conditions){
+			$sql ="update `$table` set ";
+			$couples ="";
+			foreach($args as $k=>$v){
+				$couples .="`".$k."`='".$v."',";
+			}
+			$couples = trim($couples,',');
+			$sql.=$couples. ' where '.$conditions;
+			return $this->query($sql,null);
+	}
+    function select($table,$conditions = ''){
+        $sql = "select * from ".$table;
+        if(!empty($conditions)){
+            $sql =$sql.' where '.$conditions;
+        }
+        return $this->query($sql,null);
+    }
+    function delete($table,$conditions){
+        $sql ="delete from $table where ".$conditions;
+        return $this->query($sql,null);
+    }
 	public function lastInsertId(){
 		return $this->connection->lastInsertId();
 	}
