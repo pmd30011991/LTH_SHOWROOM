@@ -32,7 +32,7 @@ class Database {
 	 * @param $password
 	 */
 	private function __construct(){
-		$this->connection = new PDO("mysql:dbname=spaceinteriors;host=127.0.0.1","root","");
+		$this->connection = new PDO("mysql:dbname=lth;host=127.0.0.1","root","");
 		$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 
@@ -86,6 +86,19 @@ class Database {
 	 *
 	 * @return int ID of the last inserted row
 	 */
+	function insert($table,$args){
+			$sql ="insert into $table(";
+			$columns ="";
+			$values ="";
+			foreach($args as $k=>$v){
+				$columns .='`'.$k.'`,';
+				$values .='`'.$k.'`,';
+			}
+			$columns = trim($columns,',');
+			$values = trim($columns,',');
+			$sql.=$columns. 'values('.$values.')';
+			return $this->query($sql);
+	}
 	public function lastInsertId(){
 		return $this->connection->lastInsertId();
 	}
