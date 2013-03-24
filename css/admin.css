@@ -1,0 +1,96 @@
+.uploadBlock {
+    width: 200px;
+    height: 100px;
+    border: 1px solid #ccc;
+    position: relative;
+    padding: 5px;
+    margin: 5px;
+}
+.uploadBlock .content {
+    width:100%;
+    height:100%;
+    position:relative;
+    overflow: hidden;
+}
+.uploadBlock .content img {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+.uploadBlock .content img.res {
+    z-index: 2;
+}
+.progressbarWrapper {
+    height: 4%;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 2px;
+    bottom: 10px;
+    background: #ccc;
+    opacity: 0.7;
+    left: 10px;
+    right: 10px;
+
+}
+.progressbar {
+    background: rgb(28, 158, 245);
+    text-align: center;
+    height: 100%;
+    color: white;
+    border-radius: 3px;
+}
+.imageCanvas {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+#img_tmp {
+    display:none;
+}
+.image_tmp {
+
+
+}
+.uploadBlockWrapper {
+    border:1px solid #ccc;
+    float: left;
+    display: inline-block;
+    position: relative;
+}
+.uploadBlock .info {
+    margin-top: 15px;
+}
+.uploadBlockWrapper .info #save_bt {
+    width: 95%;
+    height: 30px;
+    border: 1px solid #ccc;
+    margin: 5px;
+    background: #eee;
+    border-radius: 5px;
+}
+.uploadBlockWrapper .info .info_input input{float: right;
+                                            background: #e0e0e0;
+                                            border-radius: 5px;
+                                            border: 1px solid #ccc;
+}
+.uploadBlockWrapper .info .info_input {
+    clear: both;
+    width: 95%;
+    margin: 5px;
+    display: block;
+
+}
+.uploadBlockWrapper .delete_bt {
+    position: absolute;
+    width:20px;
+    height:20px;
+    background: #ccc;
+    border:1px solid #555;
+    z-index: 3;
+    right:0;
+    text-align: center;
+}
