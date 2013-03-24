@@ -9,17 +9,23 @@ require_once('Database.php');
 		function insert($args){
 			return $this->db->insert('product', $args);
 		}
-        function updateCategoryById($id,$args){
+        function updateProductById($id,$args){
             return $this->db->update('product', $args,'id='.$id);
         }	
-        function getCategoryById($id){
+        function getProductById($id){
             return $this->db->select('product','id='.$id);
         }
         function delete($id){
              return $this->db->delete('product',"id=".$id);
         }
-        function getAll(){
-             return $this->db->select('product');
+        function get($limit,$page,$order_by,$order){
+             return $this->db->select('product','',$limit,$page,$order_by,$order);
+        }
+        function lastId(){
+            return $this->db->lastInsertId();
+        }
+        function count(){
+             return $this->db->count('product');
         }
 	}
 ?>

@@ -1,4 +1,4 @@
-<a href="add_category.php">Add New Category</a>
+<a href="add_category">Add New Category</a>
 <?php 
     require_once('class/Category.php');
     $cat = new Category();
@@ -16,7 +16,7 @@
         <td>'.$r['name'].'</td>
         <td>'.$r['description'].'</td>
         <td>'.$r['order'].'</td>
-        <td><a href="edit_category.php?id='.$r['id'].'">Edit</a>-<a href="delete_category.php?id='.$r['id'].'">Delete</a></td>
+        <td><a href="edit_category?id='.$r['id'].'">Edit</a>-<a href="delete_category?id='.$r['id'].'">Delete</a></td>
         </tr>';
     }
 echo '</table>';
