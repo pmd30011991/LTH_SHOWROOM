@@ -168,6 +168,7 @@ $(document).ready(function() {
 
     $("#file").change(function(e) {
         uploadFile(this.files);
+        console.log(this.files);
     });
 
 });
