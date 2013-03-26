@@ -26,7 +26,7 @@ require_once('class/Category.php');
             echo 'Update Fail';
         }
         
-    header('Location: categories.php');
+    header('Location: categories');
     }
 ?>
 <form method="post" action="">
