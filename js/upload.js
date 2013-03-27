@@ -72,7 +72,8 @@ function draw(file, id) {
     }
 
 }
-function uploadFile(files) {
+function uploadFile(files,onlyJson,callback,onprogress) {
+    var onlyJson = false;
     var cat = $('#category_id').val();
     $.each(files, function(i, f) {
         var uniqueId = (new Date()).getTime();
@@ -85,6 +86,9 @@ function uploadFile(files) {
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         xmlhttp.upload.onprogress = function(e) {
             $("#" + uniqueId + ' .progressbar').css('width', Math.floor(e.loaded / e.total * 100) + '%');
+             if(onprogress != undefined && typeof onprogress == 'function'){
+                onprogress(Math.floor(e.loaded / e.total * 100) + '%');
+            }
 
 
         }
@@ -95,14 +99,24 @@ function uploadFile(files) {
 
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                console.log(xmlhttp.responseText);
                 json = JSON.parse(xmlhttp.responseText);
-                $("#" + uniqueId + ' .progressbarWrapper').fadeOut(3000);
-                $("#" + uniqueId + ' .content').html('<img style="display:none" class="res res_' + uniqueId + '" src="' + json['thumb'] + '"/>');
-                $("#" + uniqueId + ' .content .res').fadeIn(1000);
-                $("#" + uniqueId + ' .info_button').fadeIn(500);
-                $("#" + uniqueId + ' .file').val(json['filename']);
-                $("#" + uniqueId + ' .thumb').val(json['thumbname']);
+                type = json['filetype'];
+                elem = json['element'];
+                if(!onlyJson) {
+                    $("#" + uniqueId + ' .progressbarWrapper').fadeOut(3000);
+                    if(type == 'image') 
+                        $("#" + uniqueId + ' .content').html('<img style="display:none" class="res res_' + uniqueId + '" src="' + json['thumb'] + '"/>');
+                    else 
+                        $("#" + uniqueId + ' .content').html(elem);
+                    
+                    $("#" + uniqueId + ' .content .res').fadeIn(1000);
+                    $("#" + uniqueId + ' .info_button').fadeIn(500);
+                    $("#" + uniqueId + ' .file').val(json['filename']);
+                    $("#" + uniqueId + ' .thumb').val(json['thumbname']);
+                }
+                if(callback != undefined && typeof callback == 'function'){
+                    callback(json);
+                }
             }
         }
         xmlhttp.open("put", "upload?act=upload&category="+cat, true);
@@ -113,15 +127,17 @@ function uploadFile(files) {
         xmlhttp.setRequestHeader("X-File-Size", f.size);
         xmlhttp.setRequestHeader("Content-Type", "multipart/form-data");
         xmlhttp.send(f);
-        block = makeUploadBlock(uniqueId);
-        $('#result').append(block);
-        draw(f, uniqueId);
-        $("#" + uniqueId + ' .save_bt').click(function(){save($("#" + uniqueId));});
-        $("#" + uniqueId + ' .delete_bt').click(function(){del($("#" + uniqueId));});
+        if(!onlyJson) {
+            block = makeUploadBlock(uniqueId);
+            $('#result').append(block);
+            draw(f, uniqueId);
+            $("#" + uniqueId + ' .save_bt').click(function(){save($("#" + uniqueId));});
+            $("#" + uniqueId + ' .delete_bt').click(function(){del($("#" + uniqueId));});
+        }
     });
 }
 
-function save(block) {
+function save(block,callback) {
     var name = $('.name',block).val();
     var des = $('.description',block).val();
     var order = $('.order',block).val();
@@ -129,7 +145,7 @@ function save(block) {
     var thumb = $('.thumb',block).val();
     var id = $('.id',block).val();
     var  cat = $('#category_id').val();
-    console.log('cat='+cat);
+    console.log('name='+name);
     $.ajax({
         url:'upload',
         data:{'act':'add','category':cat,'id':id,'name':name,'description':des,'order':order,'file':image,'thumb':thumb},
@@ -139,7 +155,10 @@ function save(block) {
                 $('.id',block).val(html);
                 $(".save_bt",block).val('Update');
             }
-            console.log(html);
+            //console.log(html);
+            if(callback != undefined && typeof callback == 'function'){
+                    callback(html);
+            }
         },
         error:function(){
     
@@ -170,5 +189,35 @@ $(document).ready(function() {
         uploadFile(this.files);
         console.log(this.files);
     });
-
+    $('.bt_change_product').click(function(){
+        var parent = $(this).parent();
+        console.log('click change');
+        $('.input_file_hidden',parent).click();
+    });
+    $('.input_file_hidden').change(function(e){
+        var parent = $(this).parent();
+        var tr = parent.parent();
+        $('.progressbarWrapper',parent).fadeIn(300);
+         uploadFile(this.files,true,
+         // completed
+         function(json){
+            //console.log(json);
+            $('.product-wrapper',parent).html(json['element']);
+            $('.bt_save',parent.parent()).fadeIn(300);
+            $('.thumb',tr).val(json['thumbname']);
+            $('.file',tr).val(json['filename']);
+         },// on progress
+        function(percent){
+            $('.progressbar',parent).css('width',percent);
+            $('.progressbarWrapper',parent).fadeOut(2000);
+        });
+    });
+    $('.bt_save').click(function(){
+        parent = $(this).parent().parent();
+       save(parent,function(html){
+            console.log(html);
+       });
+       
+    });
 });
+

@@ -25,10 +25,11 @@
     }
     echo '</select>';
     ?>
+<input id="category_id" type="hidden" value="<?php echo $id; ?>" />
 </form>
 <a href="add_product?category=<?php echo $id ?>">Add New Images/Videos</a>
 <?php 
-     echo '<table>
+     echo '<table class="product-table">
         <thead>
             <th>Preview</th>
             <th>Name</th>
@@ -38,12 +39,21 @@
         </thead>
     ';
      foreach($data as $r){
+        $elem = '';
+        if(get_file_type($r['thumb']) == 'image') {
+           $elem = show_file('../products/'.$category[0]['name'].'/thumb/'.$r['thumb']);
+        } else if (get_file_type($r['thumb']) == 'video') {
+            $elem = show_file('../products/'.$category[0]['name'].'/'.$r['thumb']);
+        }
         echo '<tr>
-        <td><img src="../products/'.$category[0]['name'].'/thumb/'.$r['thumb'].'" /></td>
-        <td>'.$r['name'].'</td>
-        <td>'.$r['description'].'</td>
-        <td>'.$r['order'].'</td>
-        <td><a href="edit_product?id='.$r['id'].'">Edit</a>-<a href="delete_product?id='.$r['id'].'">Delete</a></td>
+        <td><div style="display:none" class="progressbarWrapper"><div class="progressbar"></div></div><input type="file" type="display:none" class="input_file_hidden" /><div class="bt_change_product">Change</div><div class="product-wrapper">'.$elem.'</div></td>
+        <td>'.$r['name'].'<input style="display:none" class="name" value="'.$r['name'].'" /></td>
+        <td>'.$r['description'].'<input style="display:none" class="description" value="'.$r['description'].'" /></td>
+        <td>'.$r['order'].'<input style="display:none" class="order" value="'.$r['order'].'" /></td>
+        <td><div style="display:none" class="bt_save">Save</div>-<a href="delete_product?id='.$r['id'].'">Delete</a></td>
+        <input type="hidden" class="file" value="'.$r['file'].'"/>
+        <input type="hidden" class="thumb" value="'.$r['thumb'].'"/>
+        <input type="hidden" class="id" value="'.$r['id'].'"/>
         </tr>';
     }
 echo '</table>';

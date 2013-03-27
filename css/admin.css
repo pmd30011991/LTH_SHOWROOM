@@ -94,3 +94,21 @@
     right:0;
     text-align: center;
 }
+.product-video {
+        height: 100%;
+    width: 100%;
+}
+.product-image {
+    height: 100%;
+    width: 100%;
+}
+.product-wrapper {
+    width:200px;
+    height:100px;
+}
+.product-table td {
+    position: relative;
+}
+.product-table td .progressbar {
+    width:0;
+}

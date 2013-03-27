@@ -20,6 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 mkdir('../products/' . $name . '/thumb');
                 chmod('../products/' . $name . '/thumb', 0777);
             }
+             if (!is_dir('../products/tmp')) {
+                mkdir('../products/tmp');
+                chmod('../products/tmp', 0777);
+            }
         }
         echo 'insert Success';
     } else {
