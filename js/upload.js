@@ -191,33 +191,72 @@ $(document).ready(function() {
     });
     $('.bt_change_product').click(function(){
         var parent = $(this).parent();
-        console.log('click change');
         $('.input_file_hidden',parent).click();
     });
     $('.input_file_hidden').change(function(e){
-        var parent = $(this).parent();
-        var tr = parent.parent();
-        $('.progressbarWrapper',parent).fadeIn(300);
-         uploadFile(this.files,true,
-         // completed
-         function(json){
-            //console.log(json);
-            $('.product-wrapper',parent).html(json['element']);
-            $('.bt_save',parent.parent()).fadeIn(300);
-            $('.thumb',tr).val(json['thumbname']);
-            $('.file',tr).val(json['filename']);
-         },// on progress
-        function(percent){
-            $('.progressbar',parent).css('width',percent);
-            $('.progressbarWrapper',parent).fadeOut(2000);
-        });
+		var ans = confirm("Are you sure want to repalce it ?");
+		if(ans){
+			var parent = $(this).parent();
+			var tr = parent.parent();
+			$('.progressbarWrapper',parent).fadeIn(300);
+			 uploadFile(this.files,true,
+			 // completed
+			 function(json){
+				//console.log(json);
+				$('.product-wrapper',parent).html(json['element']);
+				$('.bt_save',parent.parent()).fadeIn(300);
+				$('.thumb',tr).val(json['thumbname']);
+				$('.file',tr).val(json['filename']);
+			 },// on progress
+			function(percent){
+				$('.progressbar',parent).css('width',percent);
+				$('.progressbarWrapper',parent).fadeOut(2000);
+			});
+		}
+		$(this).val('');
     });
     $('.bt_save').click(function(){
+		var self = $(this);
         parent = $(this).parent().parent();
        save(parent,function(html){
+			self.fadeOut(300);
             console.log(html);
        });
        
     });
+	$('.editable').click(function(e){
+		e.stopPropagation();
+		var target = $(this).attr('target');
+		var input = $(this).parent().find('.'+target);
+		input.show();
+		$(this).hide();
+		input.focus();
+	});
+	$('.editablePlacehold').blur(function(e){
+		var value  = $(this).val();
+		var editable  = $(this).parent().find('.editable');
+		editable.html(value).show();
+		$(this).hide();
+
+	});
+	$('.editablePlacehold').click(function(e){
+		e.stopPropagation();
+	})
+	$('.editablePlacehold').change(function(){
+		var parent = $(this).parent().parent();
+		$('.bt_save',parent).fadeIn(300);
+	})
+	$(document).click(function(){
+		$('.editablePlacehold').hide();
+		$('.editable').show();
+	});
+	$('.bt-delete').click(function(e){
+		e.preventDefault();
+		var href= $(this).attr('href');
+		var ans = confirm("Are you want to delete it ?");
+		if (ans) {
+			window.location.href = href;
+		}
+	});
 });
 

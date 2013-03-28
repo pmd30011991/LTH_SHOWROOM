@@ -46,11 +46,11 @@
             $elem = show_file('../products/'.$category[0]['name'].'/'.$r['thumb']);
         }
         echo '<tr>
-        <td><div style="display:none" class="progressbarWrapper"><div class="progressbar"></div></div><input type="file" type="display:none" class="input_file_hidden" /><div class="bt_change_product">Change</div><div class="product-wrapper">'.$elem.'</div></td>
-        <td>'.$r['name'].'<input style="display:none" class="name" value="'.$r['name'].'" /></td>
-        <td>'.$r['description'].'<input style="display:none" class="description" value="'.$r['description'].'" /></td>
-        <td>'.$r['order'].'<input style="display:none" class="order" value="'.$r['order'].'" /></td>
-        <td><div style="display:none" class="bt_save">Save</div>-<a href="delete_product?id='.$r['id'].'">Delete</a></td>
+        <td class="product-td"><div style="display:none" class="progressbarWrapper"><div class="progressbar"></div></div><input type="file" style="display:none" class="input_file_hidden" /><div class="bt_change_product">Change</div><div class="product-wrapper">'.$elem.'</div></td>
+        <td class="product-td-editable"><div class="editable" target="name">'.$r['name'].'</div><input style="display:none" class="name editablePlacehold" value="'.$r['name'].'" /></td>
+        <td class="product-td-editable"><div class="editable" target="description">'.$r['description'].'</div><input style="display:none" class="description editablePlacehold" value="'.$r['description'].'" /></td>
+        <td class="product-td-editable"><div class="editable" target="order">'.$r['order'].'</div><input style="display:none" class="order editablePlacehold" value="'.$r['order'].'" /></td>
+        <td><div style="display:none" class="bt_save">Save</div>-<a class="bt-delete" href="delete_product?category='.$r['category_id'].'&id='.$r['id'].'">Delete</a></td>
         <input type="hidden" class="file" value="'.$r['file'].'"/>
         <input type="hidden" class="thumb" value="'.$r['thumb'].'"/>
         <input type="hidden" class="id" value="'.$r['id'].'"/>
