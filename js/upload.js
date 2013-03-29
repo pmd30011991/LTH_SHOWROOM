@@ -12,6 +12,7 @@ function makeUploadBlock(id) {
                 '<input type="hidden" class="file" name="file[]" value="" />'+
                 '<input type="hidden" class="thumb" name="thumb[]" value="" />'+
                 '<input type="hidden" class="id" name="id[]" value="0" />'+
+				'<div class="info_input"><label>Feature: </label><input type="radio" class="feature" name="feature" value="1" /></div>'+
                 '<input style="display:none" class="info_button save_bt" id="save_bt" type="button" value="Save" />'+
         '</div>'+
     '</div>';
@@ -145,17 +146,18 @@ function save(block,callback) {
     var thumb = $('.thumb',block).val();
     var id = $('.id',block).val();
     var  cat = $('#category_id').val();
+    var  feature = $('.feature').val();
     console.log('name='+name);
     $.ajax({
         url:'upload',
-        data:{'act':'add','category':cat,'id':id,'name':name,'description':des,'order':order,'file':image,'thumb':thumb},
+        data:{'act':'add','category':cat,'id':id,'name':name,'description':des,'order':order,'file':image,'thumb':thumb,'feature':feature},
         type:'get',
         success:function(html){
             if(html !='-1'){
                 $('.id',block).val(html);
                 $(".save_bt",block).val('Update');
             }
-            //console.log(html);
+            console.log(html);
             if(callback != undefined && typeof callback == 'function'){
                     callback(html);
             }

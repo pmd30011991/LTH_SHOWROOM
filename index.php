@@ -30,7 +30,16 @@
 					<div class="container">
 						<div id="content">
 						 <?php 
-								$products_folder = "products";
+								require_once('admin/core/class/Category.php');
+								$cat = new Category();
+								$data = $cat->getAll();
+								foreach($data as $d)
+								{
+									echo '<div class="item" data="'.$d['name'].'"><div class="content">';
+									echo '<img class="lazy" align="middle" src="abc"/>';
+									echo '</div><div class="title">'.$d['name'].'</div></div>';
+								}
+								/*$products_folder = "products";
 								$directory = dirname(__FILE__)."/".$products_folder;
 								 $url = parse_url('http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI']);
 								 $host = $url['host'];
@@ -56,7 +65,8 @@
 												//echo '<a class="project-item" href="'.$products_url.$entry.'"><span><img src="'.$products_url.$entry.'/logo.png" alt="" /></span><span style="display:none">'.$entry.'</span></a>';
 										 }
 								 }
-								 closedir($dir_handle);
+								 closedir($dir_handle);*/
+								 
 						?>
 						</div>
 					</div>

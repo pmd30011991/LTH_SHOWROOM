@@ -31,6 +31,7 @@
 <?php 
      echo '<table class="product-table">
         <thead>
+			<th>Feature</th>
             <th>Preview</th>
             <th>Name</th>
             <th>Description</th>
@@ -40,12 +41,17 @@
     ';
      foreach($data as $r){
         $elem = '';
+		$selected ='';
+		if($r['feature'] == '1') {
+			$selected ="checked='checked'";
+		}
         if(get_file_type($r['thumb']) == 'image') {
            $elem = show_file('../products/'.$category[0]['name'].'/thumb/'.$r['thumb']);
         } else if (get_file_type($r['thumb']) == 'video') {
             $elem = show_file('../products/'.$category[0]['name'].'/'.$r['thumb']);
         }
         echo '<tr>
+		<td><input type="radio" name="feature" class="feature" '.$selected.' value="1"></td>
         <td class="product-td"><div style="display:none" class="progressbarWrapper"><div class="progressbar"></div></div><input type="file" style="display:none" class="input_file_hidden" /><div class="bt_change_product">Change</div><div class="product-wrapper">'.$elem.'</div></td>
         <td class="product-td-editable"><div class="editable" target="name">'.$r['name'].'</div><input style="display:none" class="name editablePlacehold" value="'.$r['name'].'" /></td>
         <td class="product-td-editable"><div class="editable" target="description">'.$r['description'].'</div><input style="display:none" class="description editablePlacehold" value="'.$r['description'].'" /></td>
