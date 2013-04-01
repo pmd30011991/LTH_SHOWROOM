@@ -21,5 +21,8 @@ require_once('Database.php');
         function getAll(){
              return $this->db->select('category');
         }
+        function getFeatureById($id) {
+            return $this->db->select('product',"feature='1' and category_id=".$id);
+        }
 	}
 ?>

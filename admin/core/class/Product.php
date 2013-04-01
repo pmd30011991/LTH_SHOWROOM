@@ -15,6 +15,9 @@ require_once('Database.php');
         function getProductById($id){
             return $this->db->select('product','id='.$id);
         }
+        function resetFeatureByCategoryId($cat_id) {
+            return $this->db->update('product',array('feature'=>'0'),'category_id='.$cat_id);
+        }
         function delete($id){
              return $this->db->delete('product',"id=".$id);
         }

@@ -12,11 +12,15 @@ $file = $qfile[1].'.php';
 if(count($query)>1){
     
 }
-if ($qfile[1]=='') {
-    $file = 'categories';
+if($qfile[1] == 'getContent'){
+    require('/core/get_content.php');
+} else {
+    if ($qfile[1]=='') {
+        $file = 'categories';
+    }
+    if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH']!='XMLHttpRequest'){
+        include('core/header.php');
+    }
+    require ('core/'.$file);
 }
-if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH']!='XMLHttpRequest'){
-    include('core/header.php');
-}
-require ('core/'.$file);
 ?>

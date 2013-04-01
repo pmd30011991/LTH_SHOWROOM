@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="js/video.min.js"></script>
+		<script src="js/jquery-1.9.1.min.js"></script>    
 		<script src="js/Animate.js"></script>
 		<script src="js/Scroller.js"></script>
 		<script src="js/render.js"></script>
 		<script src="js/jquery.lazyload.min.js" type="text/javascript"></script>
+		<script src="js/FastBlur.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/video-js.css" />
 	</head>
@@ -16,12 +16,26 @@
 			<div id="header" class="">
 				<p class="logo">LOGO HERE</p>
 			</div><!-- End Header -->
+			<div id="overlay-blur"></div>
+			<canvas id="blur"></canvas>
 			<div id="main">
 				<div id="products">
 					<div class="contents">
 
 					</div>
-					<div class="title">Landscape</div>
+                    <div class="meta-data">
+                   
+                    
+                         <div id="pagging">
+                          <div class="prev controls"><img alt="prev" src="img/prev.png" /></div>
+                            <ul>
+                            </ul>
+                            
+                            <div class="next controls"><img alt="next" src="img/next.png" /></div>
+                        </div>
+                        <!--<div class="title">Welcome</div>-->
+                    </div>
+                   
 				</div><!-- End Products -->
 			</div><!-- End Main -->
 		</div><!-- End Wrapper -->
@@ -33,10 +47,16 @@
 								require_once('admin/core/class/Category.php');
 								$cat = new Category();
 								$data = $cat->getAll();
+                               
 								foreach($data as $d)
 								{
-									echo '<div class="item" data="'.$d['name'].'"><div class="content">';
-									echo '<img class="lazy" align="middle" src="abc"/>';
+                                    $feature = $cat->getFeatureById($d['id']);
+                                    if(isset($feature[0]))
+                                        $feature = $feature[0]['thumb'];
+                                    else
+                                        $feature = '';
+									echo '<div class="item" data="'.$d['id'].'"><div class="content">';
+									echo '<img class="lazy" align="middle" src="products/'.$d['name'].'/thumb/'.$feature.'"/>';
 									echo '</div><div class="title">'.$d['name'].'</div></div>';
 								}
 								/*$products_folder = "products";
@@ -71,7 +91,7 @@
 						</div>
 					</div>
 				</div><!-- End Carousel -->
-				<div class="copyright">Copyright 2012</div>
+				<!--<div class="copyright">Copyright 2012</div> -->
 		</div><!-- End footer -->
 		<script src="js/main.js"></script>
 		<script src="js/product.js"></script>
