@@ -22,7 +22,7 @@ $(function(){
         ITEM_WIDTH = CONTENT_WIDTH/COLUMNS;
         ITEM_HEIGHT = ITEM_WIDTH/RATIO;
 var getData = function(params){
-			console.log(params);
+			//console.log(params);
 			var type = params.type;
 			var page = params.page || 0;
 			//get data
@@ -50,6 +50,7 @@ var getData = function(params){
 				type:'post',
 				dataType :'json',
 				success:function(json){
+					$('#blur').fadeIn(800);
 					DATA_TYPE = type;
 					PAGE = page;
 					var data = json.data;
@@ -113,6 +114,7 @@ var removeData = function(){
 			}
 }
 var render = function(type){
+		$('#blur').hide();
 		var page  = $('#pagging ul li.active').val();
 		CONTENT_WIDTH = $(CONTENT_CLASS).innerWidth();
 		CONTENT_HEIGHT = $(CONTENT_CLASS).innerHeight()+parseFloat($(CONTENT_CLASS).css('margin-bottom'));
@@ -142,6 +144,7 @@ var render = function(type){
 					$('#img_tmp').attr('src',$('img',this).attr('src'));
 						
 						boxBlurImage('img_tmp', 'blur', 20, 1 );
+				$('#blur').fadeIn(800);
 			});
 		}
 		$(window).bind('resize',function(e){

@@ -266,7 +266,7 @@ display: inline-block;
 }
 #overlay-blur {
 	z-index:0 !important;
-	background: url('../img/overlay-pattern.png');
+	background: url('../img/overlay-pattern.png'),rgba(0,0,0,0.7);
 }
 #blur,#overlay-blur {
 	width:100% !important;

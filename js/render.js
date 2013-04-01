@@ -2,7 +2,6 @@
 var render = (function(global) {
 	
 	var docStyle = document.documentElement.style;
-	
 	var engine;
 	if (global.opera && Object.prototype.toString.call(opera) === '[object Opera]') {
 		engine = 'presto';
@@ -30,18 +29,24 @@ var render = (function(global) {
 	if (helperElem.style[perspectiveProperty] !== undef) {
 		
 		return function(left, top, zoom) {
+			var content = $('#carousel #content').get(0);
+			//console.log(content);
 			content.style[transformProperty] = 'translate3d(' + (-left) + 'px,' + (-top) + 'px,0) scale(' + zoom + ')';
 		};	
 		
 	} else if (helperElem.style[transformProperty] !== undef) {
 		
 		return function(left, top, zoom) {
+			var content = $('#carousel #content').get(0);
+			//console.log(content);
 			content.style[transformProperty] = 'translate(' + (-left) + 'px,' + (-top) + 'px) scale(' + zoom + ')';
 		};
 		
 	} else {
 		
 		return function(left, top, zoom) {
+			var content = $('#carousel #content').get(0);
+			//console.log(content);
 			content.style.marginLeft = left ? (-left/zoom) + 'px' : '';
 			content.style.marginTop = top ? (-top/zoom) + 'px' : '';
 			content.style.zoom = zoom || '';
