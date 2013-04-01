@@ -7,6 +7,6 @@
     <ul>
         <li><a href="categories">Category</a></li>
         <li><a href="products">Product</a></li>
-        <li><a href="/">Logout</a></li>
+        <li><a href="logout.php">Logout</a></li>
     </ul>
 </head>

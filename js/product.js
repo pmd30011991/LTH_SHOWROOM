@@ -12,6 +12,7 @@ $(function(){
 		RATIO = 16/9,
 		DATA_TYPE='',
 		PAGE=0,
+		PLAYER='#player',
 		totalHeight=0,
 		product_number=0,
 		data_count=0,
@@ -37,7 +38,7 @@ var getData = function(params){
 			 if(data_count%COLUMNS==0)
                 totalHeight += ITEM_HEIGHT;
             if(totalHeight < CONTENT_HEIGHT){
-					$(CONTENT_CLASS).append('<div class="product" style="display:none"><div class="content"></div></div>');
+					$(CONTENT_CLASS).append('<div class="product" style="display:none"><a class="popup-link" href=""><input type="hidden" class="file-name" value="" /><input type="hidden" class="file-type" value=""/><div class="content"></div></a></div>');
                     data_count++;
             } else {
                // console.log('break');
@@ -60,15 +61,24 @@ var getData = function(params){
 					$(PRODUCT_CLASS).hide();
 					$.each(data,function(i,e){
 						$($(PRODUCT_CLASS).get(i)).fadeIn(300);
-						if(e.type=='image')
+						if(e.type=='image') {
 							$($(PRODUCT_CLASS).get(i)).find('.content').html('<img class="lazy" src="'+e.thumb+'" />');
+							$($(PRODUCT_CLASS).get(i)).find('.popup-link').attr('href',e.file);
+							}
 						else {
-     	                 // var content = '<div class="play-overlay">Play</div><object width="100%" height="100%"> <param name="movie" value="js/player.swf"></param><param name="flashvars" value="src=../'+e.thumb+'"></param><param name="allowscriptaccess" value="always"></param><embed src="js/player.swf" type="application/x-shockwave-flash" allowscriptaccess="always"  width="600" height="409" flashvars="src=../'+e.thumb+'"></embed></object>';
-						//var content = '<div class="play-overlay">Play</div><object width="100%" height="100%"> <param name="movie" value="js/player.swf"></param><param name="flashvars" value="src=../'+e.thumb+'&controlBarMode=floating&poster="></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="js/player.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="600" height="409" flashvars="src=../'+e.thumb+'&controlBarMode=floating&poster="></embed></object>';
-						var content  = '<video preload="metadata"><source src="'+e.thumb+'" type="video/mp4"></source></video>';
-						$($(PRODUCT_CLASS).get(i)).find('.content').html(content);
+							// var content = '<div class="play-overlay">Play</div><object width="100%" height="100%"> <param name="movie" value="js/player.swf"></param><param name="flashvars" value="src=../'+e.thumb+'"></param><param name="allowscriptaccess" value="always"></param><embed src="js/player.swf" type="application/x-shockwave-flash" allowscriptaccess="always"  width="600" height="409" flashvars="src=../'+e.thumb+'"></embed></object>';
+							//var content = '<div class="play-overlay">Play</div><object width="100%" height="100%"> <param name="movie" value="js/player.swf"></param><param name="flashvars" value="src=../'+e.thumb+'&controlBarMode=floating&poster="></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="js/player.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="600" height="409" flashvars="src=../'+e.thumb+'&controlBarMode=floating&poster="></embed></object>';
+							var content  = '<div class="play-overlay"></div><video preload="metadata"><source src="'+e.thumb+'" type="video/mp4"></source></video>';
+							$($(PRODUCT_CLASS).get(i)).find('.content').html(content);
+							$($(PRODUCT_CLASS).get(i)).find('.popup-link').attr('href','#player');
 						}
-						});
+						console.log(e);
+							$($(PRODUCT_CLASS).get(i)).find('.file-type').val(e.type);
+							$($(PRODUCT_CLASS).get(i)).find('.file-name').val(e.file);
+
+							$($(PRODUCT_CLASS).get(i)).find('.popup-link').unbind('click');
+							$($(PRODUCT_CLASS).get(i)).find('.popup-link').bind('click',showPopup);
+					});
                     	$(TITLE_CLASS).html(json.category);
 						if(pages > 1) {
 							$('#pagging ul').html('');
@@ -113,6 +123,31 @@ var removeData = function(){
 
 			}
 }
+var showPopup = function(){
+	var type = $('.file-type',this).val();
+	var file = $('.file-name',this).val();
+	var content ='';
+	var inline = false;
+	//console.log(type);
+	if(type == 'video') {
+		content = '<object width="" height=""> <param name="movie" value="js/player.swf"></param><param name="flashvars" value="src=../'+file+'&controlBarMode=dock&poster="></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="js/player.swf" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" flashvars="src=../'+file+'&controlBarMode=floating&poster="></embed></object>';			
+		inline = true;
+		$(PLAYER).html(content);
+	} else if(type=='image') {
+		content = '<img src="'+file+'" />';
+		
+	}
+	
+	//$('.player-wrapper').fadeIn(300);
+	$(this).colorbox({rel:'.popup-link',inline:inline, maxWidth:"75%", maxHeight:"75%",
+					onClosed:function(){$('#player').html('')}});
+}
+$(PLAYER).click(function(e){
+	e.stopPropagation();
+});
+$('.player-wrapper').click(function(){
+	$(this).fadeOut(300);
+});
 var render = function(type){
 		$('#blur').hide();
 		var page  = $('#pagging ul li.active').val();

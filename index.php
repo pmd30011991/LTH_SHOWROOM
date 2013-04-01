@@ -7,11 +7,13 @@
 		<script src="js/render.js"></script>
 		<script src="js/jquery.lazyload.min.js" type="text/javascript"></script>
 		<script src="js/FastBlur.js"></script>
+		<script src="js/jquery.colorbox.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/colorbox.css" />
 		<link rel="stylesheet" href="css/video-js.css" />
 	</head>
 	<body>
-		<div id="player"></div>
+		<div style="display:none" id="player-wrapper" class="player-wrapper"><div id="player"></div></div>
 		<div id="wrapper" class="clearfix">
 			<div id="header" class="">
 				<p class="logo">LOGO HERE</p>
