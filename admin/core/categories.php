@@ -1,9 +1,9 @@
-<a href="add_category">Add New Category</a>
+<a class="ml-button-1" href="add_category">Add New Category</a>
 <?php 
     require_once('class/Category.php');
     $cat = new Category();
     $rows = $cat->getAll();
-    echo '<table>
+    echo '<div class="table"><table>
         <thead>
             <th>Name</th>
             <th>Description</th>
@@ -19,5 +19,5 @@
         <td><a href="edit_category?id='.$r['id'].'">Edit</a>-<a href="delete_category?id='.$r['id'].'">Delete</a></td>
         </tr>';
     }
-echo '</table>';
+echo '</table></div>';
  ?>

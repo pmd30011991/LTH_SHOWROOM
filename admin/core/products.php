@@ -1,9 +1,10 @@
 <form id="product_form" method="get" action="">
-    <?php
+<div style="display:inline;padding-right:10px">Choose Category</div>  
+  <?php
     require_once('class/Category.php');
     require_once('class/Product.php');
     require_once('functions.php');
-    $limit = 2;
+    $limit = 10;
     $page =0;
     $order_by ='order';
     $order ='asc';
@@ -27,9 +28,9 @@
     ?>
 <input id="category_id" type="hidden" value="<?php echo $id; ?>" />
 </form>
-<a href="add_product?category=<?php echo $id ?>">Add New Images/Videos</a>
+<a class="ml-button-1" href="add_product?category=<?php echo $id ?>">Add New Images/Videos</a>
 <?php 
-     echo '<table class="product-table">
+     echo '<div class="table"><table class="product-table">
         <thead>
 			<th>Feature</th>
             <th>Preview</th>
@@ -62,6 +63,6 @@
         <input type="hidden" class="id" value="'.$r['id'].'"/>
         </tr>';
     }
-echo '</table>';
+echo '</table></div>';
 get_pagging($limit, $page, $count);
 ?>

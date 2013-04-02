@@ -36,5 +36,5 @@ require_once('class/Category.php');
     <input name="description" type="text" value="<?php echo $result['description'] ?>" />
     <p>Order</p>
     <input name="order" type="text" value="<?php echo $result['order'] ?>" />
-    <input type="submit" value="Save" />
+    <input class="ml-button-1" type="submit" value="Save" />
 </form>

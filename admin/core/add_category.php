@@ -40,5 +40,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input name="description" type="text" />
     <p>Order</p>
     <input name="order" type="text" />
-    <input type="submit" value="Add" />
+    <input class="ml-button-1" type="submit" value="Add" />
 </form>

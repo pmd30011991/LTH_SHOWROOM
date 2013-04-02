@@ -19,6 +19,7 @@ if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin' && isset($_S
 	if($qfile[1] == 'getContent'){
 		require('core/get_content.php');
 	} else {
+
 		if ($qfile[1]=='' || $qfile[1]=='index') {
 			$file = 'categories.php';
 		}
@@ -29,6 +30,9 @@ if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin' && isset($_S
 			require ('core/'.$file);
 		else
 			require ('core/404.php');
+		if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || $_SERVER['HTTP_X_REQUESTED_WITH']!='XMLHttpRequest'){
+			include('core/footer.php');
+		}
 	}
 } else {
 	require ('login.php');
