@@ -9,7 +9,7 @@ $redirect_query = $_SERVER['QUERY_STRING'];
 //echo '</pre>';
 
 
-if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin' && isset($_SESSION['password']) && $_SESSION['password'] == '123456') {
+if((isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest') || (isset($_SESSION['username']) && $_SESSION['username'] == 'admin' && isset($_SESSION['password']) && $_SESSION['password'] == '123456')) {
 	$query = explode('&', $redirect_query);
 	$qfile = explode('=',$query[0]);
 	$file = $qfile[1].'.php';
