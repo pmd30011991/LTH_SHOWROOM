@@ -72,7 +72,7 @@ var getData = function(params){
 							$($(PRODUCT_CLASS).get(i)).find('.content').html(content);
 							$($(PRODUCT_CLASS).get(i)).find('.popup-link').attr('href','#player');
 						}
-						console.log(e);
+						//console.log(e);
 							$($(PRODUCT_CLASS).get(i)).find('.file-type').val(e.type);
 							$($(PRODUCT_CLASS).get(i)).find('.file-name').val(e.file);
 
