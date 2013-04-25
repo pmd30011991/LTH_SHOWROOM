@@ -113,5 +113,4 @@ $(function(){
 			$(CLASS_CONTENT).append('<div class="item"><div class="content">add<div></div>');
 			reflow();
 		}
-       
 });

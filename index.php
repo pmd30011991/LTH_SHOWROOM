@@ -42,6 +42,14 @@
 			</div><!-- End Main -->
 		</div><!-- End Wrapper -->
 		<div id="footer">
+				<script>
+					$(function(){
+						 $('img').load(function(){
+							var parent = $(this).parent();
+							$('.loadding',parent).fadeOut(500);
+						 });   		
+					});
+				</script>
 					<div id="carousel">
 					<div class="container">
 						<div id="content">
@@ -58,7 +66,7 @@
                                     else
                                         $feature = '';
 									echo '<div class="item" data="'.$d['id'].'"><div class="content">';
-									echo '<img class="lazy" align="middle" src="products/'.$d['name'].'/thumb/'.$feature.'"/>';
+									echo '<div class="loadding"></div><img class="lazy" align="middle" src="products/'.$d['name'].'/thumb/'.$feature.'"/>';
 									echo '</div><div class="title">'.$d['name'].'</div></div>';
 								}
 								/*$products_folder = "products";
